@@ -56,15 +56,9 @@ private fun NispaxStudioApp() {
     var screen by rememberSaveable { mutableStateOf("home") }
     var projectName by rememberSaveable { mutableStateOf("Untitled project") }
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = StudioBlack
-    ) {
+    Surface(modifier = Modifier.fillMaxSize(), color = StudioBlack) {
         if (screen == "editor") {
-            EditorScreen(
-                projectName = projectName,
-                onBack = { screen = "home" }
-            )
+            EditorScreen(projectName = projectName, onBack = { screen = "home" })
         } else {
             HomeScreen(
                 onCreateProject = {
@@ -86,56 +80,28 @@ private fun HomeScreen(
     onOpenProject: (String) -> Unit
 ) {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(StudioBlack)
-            .padding(horizontal = 20.dp),
+        modifier = Modifier.fillMaxSize().background(StudioBlack).padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
         item {
             Spacer(Modifier.height(28.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        "NISPAX",
-                        color = Color.White,
-                        fontSize = 27.sp,
-                        fontWeight = FontWeight.Black,
-                        letterSpacing = 2.sp
-                    )
-                    Text(
-                        "STUDIO",
-                        color = StudioRed,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 5.sp
-                    )
+                    Text("NISPAX", color = Color.White, fontSize = 27.sp, fontWeight = FontWeight.Black, letterSpacing = 2.sp)
+                    Text("STUDIO", color = StudioRed, fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 5.sp)
                 }
                 Text("0.1.0", color = Muted, fontSize = 12.sp)
             }
         }
-
         item {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Panel, RoundedCornerShape(22.dp))
-                    .padding(20.dp)
+                modifier = Modifier.fillMaxWidth().background(Panel, RoundedCornerShape(22.dp)).padding(20.dp)
             ) {
                 Text("YOUR CREATIVE WORKSPACE", color = Titanium, fontSize = 11.sp, letterSpacing = 1.5.sp)
                 Spacer(Modifier.height(10.dp))
-                Text(
-                    "Make every frame count.",
-                    color = Color.White,
-                    fontSize = 25.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Text("Make every frame count.", color = Color.White, fontSize = 25.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(8.dp))
-                Text(
-                    "A powerful mobile editing studio is taking shape.",
-                    color = Muted,
-                    fontSize = 14.sp
-                )
+                Text("A powerful mobile editing studio is taking shape.", color = Muted, fontSize = 14.sp)
                 Spacer(Modifier.height(20.dp))
                 Button(
                     onClick = onCreateProject,
@@ -147,26 +113,21 @@ private fun HomeScreen(
                 }
             }
         }
-
         item {
             Text("RECENT PROJECTS", color = Titanium, fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
         }
-
         item {
             ProjectCard("Untitled project", "New editing session", onClick = { onOpenProject("Untitled project") })
         }
-
         item {
             Text("STUDIO TOOLS", color = Titanium, fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
         }
-
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 ToolCard("Media", "Import footage", Modifier.weight(1f))
                 ToolCard("Effects", "Coming soon", Modifier.weight(1f))
             }
         }
-
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 ToolCard("Audio", "Coming soon", Modifier.weight(1f))
@@ -178,23 +139,13 @@ private fun HomeScreen(
 }
 
 @Composable
-private fun ProjectCard(
-    title: String,
-    subtitle: String,
-    onClick: () -> Unit
-) {
+private fun ProjectCard(title: String, subtitle: String, onClick: () -> Unit) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Panel, RoundedCornerShape(16.dp))
-            .clickable(onClick = onClick)
-            .padding(14.dp),
+        modifier = Modifier.fillMaxWidth().background(Panel, RoundedCornerShape(16.dp)).clickable(onClick = onClick).padding(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier
-                .size(58.dp)
-                .background(Color(0xFF292D33), RoundedCornerShape(12.dp)),
+            modifier = Modifier.size(58.dp).background(Color(0xFF292D33), RoundedCornerShape(12.dp)),
             contentAlignment = Alignment.Center
         ) {
             Text("▶", color = StudioRed, fontSize = 22.sp)
@@ -208,16 +159,8 @@ private fun ProjectCard(
 }
 
 @Composable
-private fun ToolCard(
-    title: String,
-    subtitle: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .background(Panel, RoundedCornerShape(16.dp))
-            .padding(15.dp)
-    ) {
+private fun ToolCard(title: String, subtitle: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier.background(Panel, RoundedCornerShape(16.dp)).padding(15.dp)) {
         Text(title, color = Color.White, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.height(5.dp))
         Text(subtitle, color = Muted, fontSize = 11.sp)
@@ -225,40 +168,19 @@ private fun ToolCard(
 }
 
 @Composable
-private fun EditorScreen(
-    projectName: String,
-    onBack: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(StudioBlack)
-            .padding(16.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                "‹",
-                color = Color.White,
-                fontSize = 32.sp,
-                modifier = Modifier.clickable(onClick = onBack).padding(end = 12.dp)
-            )
+private fun EditorScreen(projectName: String, onBack: () -> Unit) {
+    Column(modifier = Modifier.fillMaxSize().background(StudioBlack).padding(16.dp)) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text("‹", color = Color.White, fontSize = 32.sp, modifier = Modifier.clickable(onClick = onBack).padding(end = 12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(projectName, color = Color.White, fontWeight = FontWeight.Bold)
                 Text("EDITING WORKSPACE", color = Muted, fontSize = 10.sp, letterSpacing = 1.3.sp)
             }
             Text("EXPORT", color = StudioRed, fontWeight = FontWeight.Bold, fontSize = 12.sp)
         }
-
         Spacer(Modifier.height(18.dp))
-
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .background(Color(0xFF111317), RoundedCornerShape(18.dp)),
+            modifier = Modifier.fillMaxWidth().weight(1f).background(Color(0xFF111317), RoundedCornerShape(18.dp)),
             contentAlignment = Alignment.Center
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -268,7 +190,6 @@ private fun EditorScreen(
                 Text("Your video preview will appear here", color = Muted, fontSize = 11.sp)
             }
         }
-
         Spacer(Modifier.height(16.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text("TIMELINE", color = Titanium, fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.4.sp)
@@ -281,10 +202,10 @@ private fun EditorScreen(
         TimelineTrack("AUDIO", "Add audio")
         Spacer(Modifier.height(16.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            EditorTool("Media")
-            EditorTool("Text")
-            EditorTool("Audio")
-            EditorTool("Effects")
+            EditorTool("Media", Modifier.weight(1f))
+            EditorTool("Text", Modifier.weight(1f))
+            EditorTool("Audio", Modifier.weight(1f))
+            EditorTool("Effects", Modifier.weight(1f))
         }
         Spacer(Modifier.height(12.dp))
     }
@@ -293,32 +214,20 @@ private fun EditorScreen(
 @Composable
 private fun TimelineTrack(label: String, hint: String) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp)
-            .background(Panel, RoundedCornerShape(10.dp))
-            .padding(horizontal = 12.dp, vertical = 14.dp),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).background(Panel, RoundedCornerShape(10.dp)).padding(horizontal = 12.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(label, color = Titanium, fontSize = 9.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(0.8f))
-        Box(
-            modifier = Modifier
-                .weight(2f)
-                .background(Color(0xFF252930), RoundedCornerShape(6.dp))
-                .padding(10.dp)
-        ) {
+        Box(modifier = Modifier.weight(2f).background(Color(0xFF252930), RoundedCornerShape(6.dp)).padding(10.dp)) {
             Text(hint, color = Muted, fontSize = 10.sp)
         }
     }
 }
 
 @Composable
-private fun EditorTool(label: String) {
+private fun EditorTool(label: String, modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
-            .weight(1f)
-            .background(Panel, RoundedCornerShape(10.dp))
-            .padding(vertical = 13.dp),
+        modifier = modifier.background(Panel, RoundedCornerShape(10.dp)).padding(vertical = 13.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(label, color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Medium)
